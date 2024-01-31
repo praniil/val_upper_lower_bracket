@@ -18,12 +18,12 @@ function App() {
     setSlot2T1(value);
     console.log(setSlot2T1);
   }
-  function handleClickS1T2(event: React.MouseEvent) {
-    const value = event.currentTarget.textContent; //get the text content
-    console.log(value);
-    setSlot2T1(value);
-    console.log(setSlot2T1);
-  }
+  // function handleClickS1T2(event: React.MouseEvent) {
+  //   const value = event.currentTarget.textContent; //get the text content
+  //   console.log(value);
+  //   setSlot2T1(value);
+  //   console.log(setSlot2T1);
+  // }
 
   function handleClickS2T1(event: React.MouseEvent) {
     const value = event.currentTarget.textContent; //get the text content
@@ -32,12 +32,12 @@ function App() {
     console.log(slot2T1);
   }
 
-  function handleClickS2T2(event: React.MouseEvent) {
-    const value = event.currentTarget.textContent; //get the text content
-    console.log(value);
-    setSlot2T2(value);
-    console.log(slot2T1);
-  }
+  // function handleClickS2T2(event: React.MouseEvent) {
+  //   const value = event.currentTarget.textContent; //get the text content
+  //   console.log(value);
+  //   setSlot2T2(value);
+  //   console.log(slot2T1);
+  // }
 
   function handleClickS2(event: React.MouseEvent) {
     const value = event.currentTarget.textContent;
@@ -60,7 +60,7 @@ function App() {
             </li>
             <li
               className="cursor-pointer"
-              onClick={handleClickS1T2}
+              onClick={handleClickS1T1}
               value={item.slotP1team2}
             >
               {item.slotP1team2}
@@ -76,7 +76,7 @@ function App() {
             </li>
             <li
               className="cursor-pointer"
-              onClick={handleClickS2T2}
+              onClick={handleClickS2T1}
               key={index}
             >
               {item.slotP2team2}
