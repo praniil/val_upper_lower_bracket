@@ -15,16 +15,30 @@ function App() {
   const [lbslot1T1, setLbslot1T1] = useState<null | string>(null);
   const [lbslot1T2, setLbslot1T2] = useState<null | string>(null);
   const [lbFinals, setLbFinals] = useState<null | string>(null);
-  console.log("teams", teams)
+  console.log("teams", teams);
 
   function handleClickS1T1(event: React.MouseEvent) {
     const value = event.currentTarget.textContent; //get the text content
     if (value == teams[0].slotP1team1) {
-      setSlot2T1(value);
-      setLbslot1T1(teams[0].slotP1team2)
+      if (final != null) {
+        setSlot2T1(value);
+        setFinal(null);
+        setLbslot1T1(teams[0].slotP1team2);
+        setLbFinals(null);
+      } else {
+        setSlot2T1(value);
+        setLbslot1T1(teams[0].slotP1team2);
+      }
     } else if (value == teams[0].slotP1team2) {
-      setSlot2T1(value)
-      setLbslot1T1(teams[0].slotP1team1)
+      if (final != null) {
+        setSlot2T1(value);
+        setFinal(null);
+        setLbslot1T1(teams[0].slotP1team1);
+        setLbFinals(null);
+      } else {
+        setSlot2T1(value);
+        setLbslot1T1(teams[0].slotP1team1);
+      }
     }
   }
   // function handleClickS1T2(event: React.MouseEvent) {
@@ -37,11 +51,25 @@ function App() {
   function handleClickS2T1(event: React.MouseEvent) {
     const value = event.currentTarget.textContent; //get the text content
     if (value == teams[1].slotP2team1) {
-      setSlot2T2(value);
-      setLbslot1T2(teams[1].slotP2team2)
+      if (final != null) {
+        setSlot2T2(value);
+        setFinal(null);
+        setLbslot1T2(teams[1].slotP2team2);
+        setLbFinals(null);
+      } else {
+        setSlot2T2(value);
+        setLbslot1T2(teams[1].slotP2team2);
+      }
     } else if (value == teams[1].slotP2team2) {
-      setSlot2T2(value)
-      setLbslot1T2(teams[1].slotP2team1)
+      if (final != null) {
+        setSlot2T2(value);
+        setFinal(null);
+        setLbslot1T2(teams[1].slotP2team1);
+        setLbFinals(null);
+      } else {
+        setSlot2T2(value);
+        setLbslot1T2(teams[1].slotP2team1);
+      }
     }
   }
 
@@ -57,9 +85,9 @@ function App() {
     setFinal(value);
   }
 
-  function lbFinal (event: React.MouseEvent) {
+  function lbFinal(event: React.MouseEvent) {
     const value = event.currentTarget.textContent;
-    setLbFinals(value)
+    setLbFinals(value);
   }
 
   return (
@@ -85,18 +113,16 @@ function App() {
                   {item.slotP1team2}
                 </li>
               </ul>
-              <ul className="m-auto">
+              <ul key={index} className="m-auto">
                 <li
                   className="cursor-pointer border border-blue-500 w-24 h-auto"
                   onClick={handleClickS2T1}
-                  key={index}
                 >
                   {item.slotP2team1}
                 </li>
                 <li
                   className="cursor-pointer border border-blue-500 w-24 h-auto"
                   onClick={handleClickS2T1}
-                  key={index}
                 >
                   {item.slotP2team2}
                 </li>
@@ -123,12 +149,26 @@ function App() {
         </div>
       </div>
       <h2> LOWER BRACKET </h2>
-      
-      <div>
-        <div onClick={lbFinal}>{lbslot1T1}</div>
-        <div onClick={lbFinal}>{lbslot1T2}</div>
+
+      <div className="grid grid-flow-col">
+        <div>
+          <div
+            className="cursor-pointer border border-blue-500 w-24 h-7"
+            onClick={lbFinal}
+          >
+            {lbslot1T1}
+          </div>
+          <div
+            className="cursor-pointer border border-blue-500 w-24 h-7"
+            onClick={lbFinal}
+          >
+            {lbslot1T2}
+          </div>
+        </div>
+        <div className="cursor-pointer border border-blue-500 w-24 h-7 m-auto">
+          {lbFinals}
+        </div>
       </div>
-      <div>{lbFinals}</div>
     </div>
   );
 }
