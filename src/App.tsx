@@ -12,11 +12,20 @@ function App() {
   const [slot2T1, setSlot2T1] = useState<null | string>(null);
   const [slot2T2, setSlot2T2] = useState<null | string>(null);
   const [final, setFinal] = useState<null | string>(null);
+  const [lbslot1T1, setLbslot1T1] = useState<null | string>(null);
+  const [lbslot1T2, setLbslot1T2] = useState<null | string>(null);
+  const [lbFinals, setLbFinals] = useState<null | string>(null);
+  console.log("teams", teams)
+
   function handleClickS1T1(event: React.MouseEvent) {
     const value = event.currentTarget.textContent; //get the text content
-    console.log(value);
-    setSlot2T1(value);
-    console.log(setSlot2T1);
+    if (value == teams[0].slotP1team1) {
+      setSlot2T1(value);
+      setLbslot1T1(teams[0].slotP1team2)
+    } else if (value == teams[0].slotP1team2) {
+      setSlot2T1(value)
+      setLbslot1T1(teams[0].slotP1team1)
+    }
   }
   // function handleClickS1T2(event: React.MouseEvent) {
   //   const value = event.currentTarget.textContent; //get the text content
@@ -27,9 +36,13 @@ function App() {
 
   function handleClickS2T1(event: React.MouseEvent) {
     const value = event.currentTarget.textContent; //get the text content
-    console.log(value);
-    setSlot2T2(value);
-    console.log(slot2T1);
+    if (value == teams[1].slotP2team1) {
+      setSlot2T2(value);
+      setLbslot1T2(teams[1].slotP2team2)
+    } else if (value == teams[1].slotP2team2) {
+      setSlot2T2(value)
+      setLbslot1T2(teams[1].slotP2team1)
+    }
   }
 
   // function handleClickS2T2(event: React.MouseEvent) {
@@ -44,52 +57,78 @@ function App() {
     setFinal(value);
   }
 
+  function lbFinal (event: React.MouseEvent) {
+    const value = event.currentTarget.textContent;
+    setLbFinals(value)
+  }
+
   return (
-    <div className="App">
-      <h1 className="text-red-900 font-serif">HELLO WORLD</h1>
+    <div className="App w-96 h-auto m-auto">
       <h1>Higher Bracket</h1>
-      {initialTeams.map((item, index) => (
+      <div className="grid grid-flow-col">
         <div>
-          <ul key={index}>
-            <li
-              className="cursor-pointer"
-              onClick={handleClickS1T1}
-              value={item.slotP1team1}
-            >
-              {item.slotP1team1}
-            </li>
-            <li
-              className="cursor-pointer"
-              onClick={handleClickS1T1}
-              value={item.slotP1team2}
-            >
-              {item.slotP1team2}
-            </li>
-          </ul>
-          <ul>
-            <li
-              className="cursor-pointer"
-              onClick={handleClickS2T1}
-              key={index}
-            >
-              {item.slotP2team1}
-            </li>
-            <li
-              className="cursor-pointer"
-              onClick={handleClickS2T1}
-              key={index}
-            >
-              {item.slotP2team2}
-            </li>
-          </ul>
+          {initialTeams.map((item, index) => (
+            <div>
+              <ul key={index} className="m-auto">
+                <li
+                  className="cursor-pointer border border-blue-500 w-24 h-auto "
+                  onClick={handleClickS1T1}
+                  value={item.slotP1team1}
+                >
+                  {item.slotP1team1}
+                </li>
+                <li
+                  className="cursor-pointer border border-blue-500 w-24 h-auto"
+                  onClick={handleClickS1T1}
+                  value={item.slotP1team2}
+                >
+                  {item.slotP1team2}
+                </li>
+              </ul>
+              <ul className="m-auto">
+                <li
+                  className="cursor-pointer border border-blue-500 w-24 h-auto"
+                  onClick={handleClickS2T1}
+                  key={index}
+                >
+                  {item.slotP2team1}
+                </li>
+                <li
+                  className="cursor-pointer border border-blue-500 w-24 h-auto"
+                  onClick={handleClickS2T1}
+                  key={index}
+                >
+                  {item.slotP2team2}
+                </li>
+              </ul>
+            </div>
+          ))}
         </div>
-      ))}
-      <div onClick={handleClickS2}>{slot2T1}</div>
-      <div onClick={handleClickS2}>{slot2T2}</div>
-      <div>
-        Finals <div>{final}</div>
+        <div className="m-auto">
+          <div
+            className="cursor-pointer border border-blue-500 w-24 h-7 m-auto"
+            onClick={handleClickS2}
+          >
+            {slot2T1}
+          </div>
+          <div
+            className="cursor-pointer border border-blue-500 w-24 h-7 m-auto"
+            onClick={handleClickS2}
+          >
+            {slot2T2}
+          </div>
+        </div>
+        <div className="cursor-pointer border border-blue-500 w-24 h-7 m-auto">
+          {final}
+        </div>
       </div>
       <h2> LOWER BRACKET </h2>
+      
+      <div>
+        <div onClick={lbFinal}>{lbslot1T1}</div>
+        <div onClick={lbFinal}>{lbslot1T2}</div>
+      </div>
+      <div>{lbFinals}</div>
     </div>
   );
 }
