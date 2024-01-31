@@ -11,30 +11,33 @@ function App() {
   const [teams, setTeams] = useState(initialTeams);
   const [slot2T1, setSlot2T1] = useState<null | string>(null);
   const [slot2T2, setSlot2T2] = useState<null | string>(null);
-  const [final, setFinal] = useState<null | string>(null);
+  const [upFinal, setUpFinal] = useState<null | string>(null);
   const [lbslot1T1, setLbslot1T1] = useState<null | string>(null);
   const [lbslot1T2, setLbslot1T2] = useState<null | string>(null);
   const [lbFinals, setLbFinals] = useState<null | string>(null);
+  const [winner, setWinner] = useState<null | string>(null);
   console.log("teams", teams);
 
   function handleClickS1T1(event: React.MouseEvent) {
     const value = event.currentTarget.textContent; //get the text content
     if (value == teams[0].slotP1team1) {
-      if (final != null) {
+      if (upFinal != null) {
         setSlot2T1(value);
-        setFinal(null);
+        setUpFinal(null);
         setLbslot1T1(teams[0].slotP1team2);
         setLbFinals(null);
+        setWinner(null);
       } else {
         setSlot2T1(value);
         setLbslot1T1(teams[0].slotP1team2);
       }
     } else if (value == teams[0].slotP1team2) {
-      if (final != null) {
+      if (upFinal != null) {
         setSlot2T1(value);
-        setFinal(null);
+        setUpFinal(null);
         setLbslot1T1(teams[0].slotP1team1);
         setLbFinals(null);
+        setWinner(null);
       } else {
         setSlot2T1(value);
         setLbslot1T1(teams[0].slotP1team1);
@@ -51,21 +54,23 @@ function App() {
   function handleClickS2T1(event: React.MouseEvent) {
     const value = event.currentTarget.textContent; //get the text content
     if (value == teams[1].slotP2team1) {
-      if (final != null) {
+      if (upFinal != null) {
         setSlot2T2(value);
-        setFinal(null);
+        setUpFinal(null);
         setLbslot1T2(teams[1].slotP2team2);
         setLbFinals(null);
+        setWinner(null);
       } else {
         setSlot2T2(value);
         setLbslot1T2(teams[1].slotP2team2);
       }
     } else if (value == teams[1].slotP2team2) {
-      if (final != null) {
+      if (upFinal != null) {
         setSlot2T2(value);
-        setFinal(null);
+        setUpFinal(null);
         setLbslot1T2(teams[1].slotP2team1);
         setLbFinals(null);
+        setWinner(null);
       } else {
         setSlot2T2(value);
         setLbslot1T2(teams[1].slotP2team1);
@@ -82,7 +87,7 @@ function App() {
 
   function handleClickS2(event: React.MouseEvent) {
     const value = event.currentTarget.textContent;
-    setFinal(value);
+    setUpFinal(value);
   }
 
   function lbFinal(event: React.MouseEvent) {
@@ -90,14 +95,19 @@ function App() {
     setLbFinals(value);
   }
 
+  function grandFinals(event: React.MouseEvent) {
+    const value = event.currentTarget.textContent;
+    setWinner(value)
+  }
+
   return (
     <div className="App w-96 h-auto m-auto">
-      <h1>Higher Bracket</h1>
+      <h1>Upper Bracket</h1>
       <div className="grid grid-flow-col">
         <div>
           {initialTeams.map((item, index) => (
-            <div>
-              <ul key={index} className="m-auto">
+            <div key={index}>
+              <ul className="m-auto">
                 <li
                   className="cursor-pointer border border-blue-500 w-24 h-auto "
                   onClick={handleClickS1T1}
@@ -113,7 +123,7 @@ function App() {
                   {item.slotP1team2}
                 </li>
               </ul>
-              <ul key={index} className="m-auto">
+              <ul className="m-auto">
                 <li
                   className="cursor-pointer border border-blue-500 w-24 h-auto"
                   onClick={handleClickS2T1}
@@ -145,7 +155,7 @@ function App() {
           </div>
         </div>
         <div className="cursor-pointer border border-blue-500 w-24 h-7 m-auto">
-          {final}
+          {upFinal}
         </div>
       </div>
       <h2> LOWER BRACKET </h2>
@@ -168,6 +178,14 @@ function App() {
         <div className="cursor-pointer border border-blue-500 w-24 h-7 m-auto">
           {lbFinals}
         </div>
+      </div>
+      <h2>Grand Finals</h2>
+      <div className="grid grid-flow-col">
+        <div>
+          <div onClick={grandFinals} className="cursor-pointer border border-blue-500 w-24 h-7">{upFinal}</div>
+          <div onClick={grandFinals} className="cursor-pointer border border-blue-500 w-24 h-7">{lbFinals}</div>
+        </div>
+        <div className="cursor-pointer border border-blue-500 w-24 h-7 m-auto">{winner}</div>
       </div>
     </div>
   );
